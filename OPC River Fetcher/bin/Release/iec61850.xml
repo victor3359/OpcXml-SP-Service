@@ -1,0 +1,9 @@
+<Substation Position="Kepware.KEPServerEX.V4" Host="127.0.0.1">
+  <Channel_1>
+    <Device_1>
+      <Tag_1>10960</Tag_1>
+      <Tag_2>10959</Tag_2>
+      <Tag_3>10959</Tag_3>
+    </Device_1>
+  </Channel_1>
+</Substation>

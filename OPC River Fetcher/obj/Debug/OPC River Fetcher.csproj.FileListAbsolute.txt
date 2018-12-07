@@ -1,0 +1,9 @@
+C:\Users\ICPSI_SUBARU\source\repos\OPC River Fetcher\OPC River Fetcher\obj\Debug\OPC River Fetcher.csprojAssemblyReference.cache
+C:\Users\ICPSI_SUBARU\source\repos\OPC River Fetcher\OPC River Fetcher\obj\Debug\OPC River Fetcher.csproj.CoreCompileInputs.cache
+C:\Users\ICPSI_SUBARU\source\repos\OPC River Fetcher\OPC River Fetcher\bin\Debug\OPC River Fetcher.exe.config
+C:\Users\ICPSI_SUBARU\source\repos\OPC River Fetcher\OPC River Fetcher\bin\Debug\OPC River Fetcher.exe
+C:\Users\ICPSI_SUBARU\source\repos\OPC River Fetcher\OPC River Fetcher\bin\Debug\OPC River Fetcher.pdb
+C:\Users\ICPSI_SUBARU\source\repos\OPC River Fetcher\OPC River Fetcher\obj\Debug\OPC River Fetcher.exe
+C:\Users\ICPSI_SUBARU\source\repos\OPC River Fetcher\OPC River Fetcher\obj\Debug\OPC River Fetcher.pdb
+C:\Users\ICPSI_SUBARU\source\repos\OPC River Fetcher\OPC River Fetcher\obj\Debug\Interop.OPCAutomation.dll
+C:\Users\ICPSI_SUBARU\source\repos\OPC River Fetcher\OPC River Fetcher\obj\Debug\OPC River Fetcher.csproj.ResolveComReference.cache
