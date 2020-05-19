@@ -7,3 +7,37 @@ C:\Users\ICPSI_SUBARU\source\repos\OPC River Fetcher\OPC River Fetcher\obj\Debug
 C:\Users\ICPSI_SUBARU\source\repos\OPC River Fetcher\OPC River Fetcher\obj\Debug\OPC River Fetcher.pdb
 C:\Users\ICPSI_SUBARU\source\repos\OPC River Fetcher\OPC River Fetcher\obj\Debug\Interop.OPCAutomation.dll
 C:\Users\ICPSI_SUBARU\source\repos\OPC River Fetcher\OPC River Fetcher\obj\Debug\OPC River Fetcher.csproj.ResolveComReference.cache
+C:\Users\ICPSI_SUBARU\Source\Repos\opc-xml-operator\OPC River Fetcher\bin\Debug\OPC River Fetcher.exe.config
+C:\Users\ICPSI_SUBARU\Source\Repos\opc-xml-operator\OPC River Fetcher\bin\Debug\OPC River Fetcher.exe
+C:\Users\ICPSI_SUBARU\Source\Repos\opc-xml-operator\OPC River Fetcher\bin\Debug\OPC River Fetcher.pdb
+C:\Users\ICPSI_SUBARU\Source\Repos\opc-xml-operator\OPC River Fetcher\bin\Debug\Common.Logging.Core.dll
+C:\Users\ICPSI_SUBARU\Source\Repos\opc-xml-operator\OPC River Fetcher\bin\Debug\Common.Logging.dll
+C:\Users\ICPSI_SUBARU\Source\Repos\opc-xml-operator\OPC River Fetcher\bin\Debug\TitaniumAS.Opc.Client.dll
+C:\Users\ICPSI_SUBARU\Source\Repos\opc-xml-operator\OPC River Fetcher\bin\Debug\Common.Logging.pdb
+C:\Users\ICPSI_SUBARU\Source\Repos\opc-xml-operator\OPC River Fetcher\bin\Debug\Common.Logging.xml
+C:\Users\ICPSI_SUBARU\Source\Repos\opc-xml-operator\OPC River Fetcher\bin\Debug\Common.Logging.Core.pdb
+C:\Users\ICPSI_SUBARU\Source\Repos\opc-xml-operator\OPC River Fetcher\bin\Debug\Common.Logging.Core.xml
+C:\Users\ICPSI_SUBARU\Source\Repos\opc-xml-operator\OPC River Fetcher\obj\Debug\OPC River Fetcher.csprojAssemblyReference.cache
+C:\Users\ICPSI_SUBARU\Source\Repos\opc-xml-operator\OPC River Fetcher\obj\Debug\Interop.OPCAutomation.dll
+C:\Users\ICPSI_SUBARU\Source\Repos\opc-xml-operator\OPC River Fetcher\obj\Debug\OPC River Fetcher.csproj.ResolveComReference.cache
+C:\Users\ICPSI_SUBARU\Source\Repos\opc-xml-operator\OPC River Fetcher\obj\Debug\OPC River Fetcher.csproj.CoreCompileInputs.cache
+C:\Users\ICPSI_SUBARU\Source\Repos\opc-xml-operator\OPC River Fetcher\obj\Debug\OPC River Fetcher.csproj.CopyComplete
+C:\Users\ICPSI_SUBARU\Source\Repos\opc-xml-operator\OPC River Fetcher\obj\Debug\OPC River Fetcher.exe
+C:\Users\ICPSI_SUBARU\Source\Repos\opc-xml-operator\OPC River Fetcher\obj\Debug\OPC River Fetcher.pdb
+C:\Users\Subaru\source\repos\opc-xml-operator_v2\OPC River Fetcher\bin\Debug\OPC River Fetcher.exe.config
+C:\Users\Subaru\source\repos\opc-xml-operator_v2\OPC River Fetcher\bin\Debug\OPC River Fetcher.exe
+C:\Users\Subaru\source\repos\opc-xml-operator_v2\OPC River Fetcher\bin\Debug\OPC River Fetcher.pdb
+C:\Users\Subaru\source\repos\opc-xml-operator_v2\OPC River Fetcher\bin\Debug\TitaniumAS.Opc.Client.dll
+C:\Users\Subaru\source\repos\opc-xml-operator_v2\OPC River Fetcher\obj\Debug\OPC River Fetcher.csproj.ResolveComReference.cache
+C:\Users\Subaru\source\repos\opc-xml-operator_v2\OPC River Fetcher\obj\Debug\OPC River Fetcher.csproj.CopyComplete
+C:\Users\Subaru\source\repos\opc-xml-operator_v2\OPC River Fetcher\obj\Debug\OPC River Fetcher.exe
+C:\Users\Subaru\source\repos\opc-xml-operator_v2\OPC River Fetcher\obj\Debug\OPC River Fetcher.pdb
+C:\Users\Subaru\source\repos\opc-xml-operator_v2\OPC River Fetcher\bin\Debug\Topshelf.dll
+C:\Users\Subaru\source\repos\opc-xml-operator_v2\OPC River Fetcher\bin\Debug\Topshelf.xml
+C:\Users\Subaru\source\repos\opc-xml-operator_v2\OPC River Fetcher\bin\Debug\Common.Logging.Core.dll
+C:\Users\Subaru\source\repos\opc-xml-operator_v2\OPC River Fetcher\bin\Debug\Common.Logging.dll
+C:\Users\Subaru\source\repos\opc-xml-operator_v2\OPC River Fetcher\bin\Debug\Common.Logging.pdb
+C:\Users\Subaru\source\repos\opc-xml-operator_v2\OPC River Fetcher\bin\Debug\Common.Logging.xml
+C:\Users\Subaru\source\repos\opc-xml-operator_v2\OPC River Fetcher\bin\Debug\Common.Logging.Core.pdb
+C:\Users\Subaru\source\repos\opc-xml-operator_v2\OPC River Fetcher\bin\Debug\Common.Logging.Core.xml
+C:\Users\Subaru\source\repos\opc-xml-operator_v2\OPC River Fetcher\obj\Debug\OPC River Fetcher.csprojAssemblyReference.cache
