@@ -22,7 +22,7 @@ namespace OPC_River_Fetcher
 
                 x.SetServiceName(@"OpcXmlTransferService");
                 x.SetDisplayName(@"OpcXml SP Transfer Service");
-                x.SetDescription(@"OpcXml SP Transfer is OpcRead Service for Tashan Project by ICPSI.");
+                x.SetDescription(@"OpcXml SP Transfer is a Service which can convert Opc information to Xml and send it to SerialPort. The Project is for Tashan by ICPSI.");
 
 
                 x.EnableServiceRecovery(r =>
