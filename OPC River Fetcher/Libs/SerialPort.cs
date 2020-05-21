@@ -24,9 +24,12 @@ namespace OPC_River_Fetcher.Libs
                 port.Open();
                 isConnected = true;
             }
-            catch(Exception e)
+            catch(Exception ex)
             {
-                Console.WriteLine(e.Message);
+                localDate = DateTime.Now;
+                Console.WriteLine(ex.Message);
+                string[] Error = new string[] { $"{localDate}\t\t{ex.Message}" };
+                File.AppendAllLines(@"./SPConnectionError.log", Error);
                 isConnected = false;
             }
         }
@@ -44,8 +47,9 @@ namespace OPC_River_Fetcher.Libs
                 }
             } catch (Exception ex)
             {
+                localDate = DateTime.Now;
                 Console.WriteLine(ex.Message);
-                string[] Error = new string[] { ex.Message };
+                string[] Error = new string[] { $"{localDate}\t\t{ex.Message}" };
                 File.AppendAllLines(@"./SPConnectionError.log", Error);
                 isConnected = false;
             }

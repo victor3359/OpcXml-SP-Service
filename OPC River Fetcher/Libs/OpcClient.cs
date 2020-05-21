@@ -9,8 +9,9 @@ namespace OPC_River_Fetcher.Libs
 {
     class OpcClient
     {
-        OpcDaServer Server;
-        OpcDaGroup group;
+        private OpcDaServer Server;
+        private OpcDaGroup group;
+        private DateTime localDate;
         public OpcClient(string progid, string host)
         {
             Uri url = UrlBuilder.Build(progid, host);
@@ -21,7 +22,8 @@ namespace OPC_River_Fetcher.Libs
             }
             catch (Exception ex)
             {
-                string[] Error = new string[] { ex.Message };
+                localDate = DateTime.Now;
+                string[] Error = new string[] { $"{localDate}\t\t{ex.Message}" };
                 File.AppendAllLines(@"./OpcConnectionError.log", Error);
                 Console.WriteLine(ex.Message);
             }
