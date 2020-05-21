@@ -11,6 +11,7 @@ namespace OPC_River_Fetcher
     public class TransferService
     {
         private readonly Timer _timer;
+        private static readonly int _MaxmumOpcClientInstance = 10;
 
         private static string iniFileName = @"./OPConfig.ini";
         private static string ComName, ReceivedFilePath; //Common Parameters
@@ -20,12 +21,12 @@ namespace OPC_River_Fetcher
         private static List<string> OpcItemsNamed = new List<string>();
         private static serialPort Serialport;
 
-        private static OpcClient[] OpcClient = new OpcClient[10];
-        private static XmlOperator[] XmlHandler = new XmlOperator[10];
-        private static string[] XmlPath = new string[10];
-        private static string[] ServerName = new string[10];
-        private static string[] ServerHost = new string[10];
-        private static string[] ConfigFileName = new string[10];
+        private static OpcClient[] OpcClient = new OpcClient[_MaxmumOpcClientInstance];
+        private static XmlOperator[] XmlHandler = new XmlOperator[_MaxmumOpcClientInstance];
+        private static string[] XmlPath = new string[_MaxmumOpcClientInstance];
+        private static string[] ServerName = new string[_MaxmumOpcClientInstance];
+        private static string[] ServerHost = new string[_MaxmumOpcClientInstance];
+        private static string[] ConfigFileName = new string[_MaxmumOpcClientInstance];
         private static string SendStr;
 
         public TransferService()

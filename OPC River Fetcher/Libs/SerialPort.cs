@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.IO.Ports;
 using System.Xml;
 
@@ -41,9 +42,11 @@ namespace OPC_River_Fetcher.Libs
                     Console.WriteLine($"Writing... \n{buf}");
                     port.Write(buf);
                 }
-            } catch (Exception e)
+            } catch (Exception ex)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(ex.Message);
+                string[] Error = new string[] { ex.Message };
+                File.AppendAllLines(@"./SPConnectionError.log", Error);
                 isConnected = false;
             }
         }
