@@ -32,7 +32,7 @@ For the versions available, see the [tags on this repository](https://github.com
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [Victor](https://github.com/victor3359)
+* **JunWei Liu** - *Initial work* - [victor3359](https://github.com/victor3359)
 
 See also the list of [contributors](https://github.com/victor3359/OpcXml-SP-Service/contributors) who participated in this project.
 
