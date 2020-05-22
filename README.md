@@ -26,13 +26,9 @@ Add additional notes about how to deploy this on a live system
 * [TitaniumAS.Opc.Client](https://github.com/titanium-as/TitaniumAS.Opc.Client) - The OpcDa framework used
 * [Topshelf](http://topshelf-project.com/) - The Windows Service framework used
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/victor3359/OpcXml-SP-Service/tags). 
+For the versions available, see the [tags on this repository](https://github.com/victor3359/OpcXml-SP-Service/tags). 
 
 ## Authors
 
