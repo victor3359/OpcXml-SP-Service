@@ -6,7 +6,6 @@ Opc to XML Conversion Tool
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running
@@ -20,6 +19,13 @@ git clone https://github.com/victor3359/OpcXml-SP-Service.git OpcClient
 ## Deployment
 
 Add additional notes about how to deploy this on a live system
+
+## Technoleages
+
+* Opc DA 1.0, 2.0, 3.0
+* Xml
+* Serial Port
+* Windows Service
 
 ## Built With
 
@@ -39,10 +45,3 @@ See also the list of [contributors](https://github.com/victor3359/OpcXml-SP-Serv
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Opc DA 1.0, 2.0, 3.0
-* Xml
-* SerialPort
-* etc
