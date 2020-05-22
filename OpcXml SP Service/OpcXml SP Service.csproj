@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{713F1CBF-3D3D-4F7B-A1BE-CE54A0FDE94C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>OPC_River_Fetcher</RootNamespace>
-    <AssemblyName>OPC River Fetcher</AssemblyName>
+    <RootNamespace>OpcXml_SP_Service</RootNamespace>
+    <AssemblyName>OpcXml SP Service</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

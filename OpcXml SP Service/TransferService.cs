@@ -4,9 +4,9 @@ using System.IO;
 using System.IO.Ports;
 using System.Collections.Generic;
 using TitaniumAS.Opc.Client.Da;
-using OPC_River_Fetcher.Libs;
+using OpcXml_SP_Service.Libs;
 
-namespace OPC_River_Fetcher
+namespace OpcXml_SP_Service
 {
     public class TransferService
     {

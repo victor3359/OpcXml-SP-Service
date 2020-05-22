@@ -2,7 +2,7 @@
 using System.IO;
 using Topshelf;
 
-namespace OPC_River_Fetcher
+namespace OpcXml_SP_Service
 {
     class Program
     {

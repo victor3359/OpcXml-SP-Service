@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Runtime.InteropServices;
 
-namespace OPC_River_Fetcher.Libs
+namespace OpcXml_SP_Service.Libs
 {
     class SetupIni
     {

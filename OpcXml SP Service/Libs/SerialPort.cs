@@ -3,7 +3,7 @@ using System.IO;
 using System.IO.Ports;
 using System.Xml;
 
-namespace OPC_River_Fetcher.Libs
+namespace OpcXml_SP_Service.Libs
 {
     class serialPort
     {

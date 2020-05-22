@@ -5,7 +5,7 @@ using TitaniumAS.Opc.Client.Common;
 using TitaniumAS.Opc.Client.Da;
 using TitaniumAS.Opc.Client.Da.Browsing;
 
-namespace OPC_River_Fetcher.Libs
+namespace OpcXml_SP_Service.Libs
 {
     class OpcClient
     {
