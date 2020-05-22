@@ -20,7 +20,7 @@ git clone https://github.com/victor3359/OpcXml-SP-Service.git OpcClient
 
 Add additional notes about how to deploy this on a live system
 
-## Technoleages
+## Technology
 
 * Opc DA 1.0, 2.0, 3.0
 * Xml
