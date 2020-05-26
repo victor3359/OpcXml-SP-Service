@@ -12,18 +12,22 @@ namespace OpcXml_SP_Service.Libs
         private OpcDaServer Server;
         private OpcDaGroup group;
         private DateTime localDate;
+        public bool OpcIsConnected()
+        {
+            return Server.IsConnected;
+        }
         public OpcClient(string progid, string host)
         {
             Uri url = UrlBuilder.Build(progid, host);
-            Server = new OpcDaServer(url);
             try
             {
+                Server = new OpcDaServer(url);
                 Server.Connect();
             }
             catch (Exception ex)
             {
                 localDate = DateTime.Now;
-                string[] Error = new string[] { $"{localDate}\t\t{ex.Message}" };
+                string[] Error = new string[] { $"{localDate}\t\t{ex.Message} at ServerConnect." };
                 File.AppendAllLines(@"./OpcConnectionError.log", Error);
                 Console.WriteLine(ex.Message);
             }
@@ -39,6 +43,11 @@ namespace OpcXml_SP_Service.Libs
         }
         public void AddOpcDaItems(string[] items)
         {
+            if (!Server.IsConnected)
+            {
+                Console.WriteLine("Server connection is failed.");
+                return;
+            }
             List<OpcDaItemDefinition> definitions = new List<OpcDaItemDefinition>();
             foreach (string item in items)
             {

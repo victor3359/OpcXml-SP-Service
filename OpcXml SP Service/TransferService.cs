@@ -43,6 +43,11 @@ namespace OpcXml_SP_Service
             {
                 try
                 {
+                    if (!OpcClient[ServerInd].OpcIsConnected())
+                    {
+                        Console.WriteLine($"OpcServer_{ServerInd} connection is failed, reconnecting...");
+                        Reconnect2OpcServer(ServerInd);
+                    }
                     OpcDaItemValue[] items = OpcClient[ServerInd].ReadOpcDaValues();
                     foreach (var item in items)
                     {
@@ -122,7 +127,8 @@ namespace OpcXml_SP_Service
                                 OpcItemsNamed.Add(ret);
                                 XmlHandler[ServerCnt].AddNode(ret);
                             }
-                            OpcClient[ServerCnt].AddOpcDaItems(OpcItemsNamed.ToArray());
+                            if(OpcClient[ServerCnt].OpcIsConnected())
+                                OpcClient[ServerCnt].AddOpcDaItems(OpcItemsNamed.ToArray());
                         }
 
                         Console.WriteLine($"ReadService_{ServerCnt} Initializing..." +

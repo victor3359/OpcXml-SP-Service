@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml;
+using System.Text.RegularExpressions;
 
 namespace OpcXml_SP_Service.Libs
 {
@@ -8,6 +9,7 @@ namespace OpcXml_SP_Service.Libs
         public XmlDocument doc { get; }
         private static string rootName = @"PowerPlant";
         private static string XMLfilePath;
+        Regex regNum = new Regex("^[0-9]");
         public XmlOperator(string subName, string host, string filePath)
         {
             doc = new XmlDocument();
@@ -19,24 +21,22 @@ namespace OpcXml_SP_Service.Libs
         }
         private string ReDefinitionPath(string root)
         {
-            return root.Replace(@"$", @"s33b6a").Replace(@":", @"s33b6b").Replace(@"/", @"s33b6c").Replace(@"@", @"s33b6d").Replace(@"_", @"s33b6e").Replace(@"-", @"s33b6f").Replace(@"+", @"s33b6g");
+            if (regNum.IsMatch(root)) root = $"i{root}";
+            return root.Replace(@"$", @"s3b1").Replace(@":", @"s3b2").Replace(@"/", @"s3b3").Replace(@"@", @"s3b4").Replace(@"_", @"s3b5").Replace(@"-", @"s3b6").Replace(@"+", @"s3b7").Replace(@"#", "s3b8");
         }
-        public void AddNode(string OPCPath)
+        public void AddNode(string OpcPath)
         {
-            OPCPath = ReDefinitionPath(OPCPath);
-            string _temp = "", path = "";
-            path += rootName;
-            _temp = path;
-            path += ($"//{OPCPath}");
+            OpcPath = ReDefinitionPath(OpcPath);
+            string path = $"{rootName}//{OpcPath}";
             XmlNode node = doc.SelectSingleNode(path);
             if (node == null)
             {
-                XmlElement newNode = doc.CreateElement(OPCPath);
-                XmlNode root = doc.SelectSingleNode(_temp);
+                XmlElement newNode = doc.CreateElement(OpcPath);
+                XmlNode root = doc.SelectSingleNode(rootName);
                 root.AppendChild(newNode);
             }
         }
-        public void ModifyNodeValue(string OPCPath, string value)
+        public void ModifyNodeValue(string OpcPath, string value)
         {
             try
             {
@@ -51,11 +51,8 @@ namespace OpcXml_SP_Service.Libs
                     default:
                         break;
                 }
-                OPCPath = ReDefinitionPath(OPCPath);
-                string _temp = "", path = "";
-                path += rootName;
-                _temp = path;
-                path += ($"//{OPCPath}");
+                OpcPath = ReDefinitionPath(OpcPath);
+                string path = $"{rootName}//{OpcPath}";
                 XmlNode node = doc.SelectSingleNode(path);
                 node.InnerText = value;
             }
