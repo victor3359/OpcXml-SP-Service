@@ -38,7 +38,7 @@ namespace OpcXml_SP_Service.Libs
             try
             {
                 localDate = DateTime.Now;
-                tmpStr = $"<Data UpdateTime=\"{ localDate }\">";
+                tmpStr = $"<Data UpdateTime=\"{ localDate.ToString(System.Globalization.CultureInfo.InvariantCulture) }\">";
                 string buf = tmpStr + senddata + tmpEnd;
                 if (isConnected)
                 {
