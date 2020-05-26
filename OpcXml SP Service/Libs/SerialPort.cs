@@ -11,9 +11,9 @@ namespace OpcXml_SP_Service.Libs
         private string data;
         private string tmpStr = @"<Data>", tmpEnd = @"</Data>";
         private DateTime localDate;
-        public bool isConnected = false;
         private string ReceivedFilePath;
-        private XmlDocument xml = new XmlDocument();
+        public XmlDocument xml = new XmlDocument();
+        public bool hasNewData;
         public serialPort(string portName, int baudRate, Parity parity, int dataBits, StopBits stopBits, string ReceivedFilePath)
         {
             try
@@ -22,7 +22,6 @@ namespace OpcXml_SP_Service.Libs
                 port = new SerialPort(portName, baudRate, parity, dataBits, stopBits);
                 port.DataReceived += new SerialDataReceivedEventHandler(serial_DataReceived);
                 port.Open();
-                isConnected = true;
             }
             catch(Exception ex)
             {
@@ -30,8 +29,11 @@ namespace OpcXml_SP_Service.Libs
                 localDate = DateTime.Now;
                 string[] Error = new string[] { $"{localDate}\t\t{ex.Message}" };
                 File.AppendAllLines(@"./SPConnectionError.log", Error);
-                isConnected = false;
             }
+        }
+        public bool IsOpened()
+        {
+            return port.IsOpen;
         }
         public void sendDatas(string senddata)
         {
@@ -40,18 +42,18 @@ namespace OpcXml_SP_Service.Libs
                 localDate = DateTime.Now;
                 tmpStr = $"<Data UpdateTime=\"{ localDate.ToString(System.Globalization.CultureInfo.InvariantCulture) }\">";
                 string buf = tmpStr + senddata + tmpEnd;
-                if (isConnected)
+                if (port.IsOpen)
                 {
                     Console.WriteLine($"Writing... \n{buf}");
                     port.Write(buf);
                 }
-            } catch (Exception ex)
+            } 
+            catch (Exception ex)
             {
                 localDate = DateTime.Now;
                 Console.WriteLine(ex.Message);
                 string[] Error = new string[] { $"{localDate}\t\t{ex.Message}" };
                 File.AppendAllLines(@"./SPConnectionError.log", Error);
-                isConnected = false;
             }
         }
         private void serial_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -63,6 +65,7 @@ namespace OpcXml_SP_Service.Libs
             {
                 xml.LoadXml(data);
                 xml.Save(ReceivedFilePath);
+                hasNewData = true;
             }
             catch(Exception ex)
             {

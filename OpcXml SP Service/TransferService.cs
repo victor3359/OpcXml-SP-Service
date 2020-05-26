@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Xml;
 using System.Timers;
 using System.IO;
 using System.IO.Ports;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using TitaniumAS.Opc.Client.Da;
 using OpcXml_SP_Service.Libs;
 
@@ -28,6 +30,12 @@ namespace OpcXml_SP_Service
         private static string[] ServerHost = new string[_MaxmumOpcClientInstance];
         private static string[] ConfigFileName = new string[_MaxmumOpcClientInstance];
         private static string SendStr;
+
+        private static bool HasOpcRiver;
+        private static string OpcRiverHost, OpcRiverName, OpcRiverItemsFile;
+        private static List<string> OpcRiverItems = new List<string>();
+        private static OpcClient OpcRiver;
+        private static List<string> OpcRiverTags = new List<string>();
 
         public TransferService()
         {
@@ -55,7 +63,7 @@ namespace OpcXml_SP_Service
                     }
                     XmlHandler[ServerInd].SavingFile();
 
-                    if (Serialport.isConnected)
+                    if (Serialport.IsOpened())
                     {
                         if (ServerInd.Equals(ServerCnt - 1))
                         {
@@ -74,9 +82,29 @@ namespace OpcXml_SP_Service
                 catch (Exception Ex)
                 {
                     Console.WriteLine(Ex.Message);
-                    Reconnect2OpcServer(ServerInd);
                 }
             }
+            if (HasOpcRiver)
+            {
+                if (Serialport.hasNewData)
+                {
+                    List<string> values = new List<string>();
+                    foreach(string item in OpcRiverItems)
+                    {
+                        string path = $"Data//PowerPlant//{ReDefinitionPath(item)}";
+                        XmlNode node = Serialport.xml.SelectSingleNode(path);
+                        values.Add(node.InnerText);
+                    }
+                    OpcRiver.WriteOpcRiverDaValues(OpcRiverTags.ToArray(), values.ToArray());
+                }
+            }
+        }
+
+        Regex regNum = new Regex("^[0-9]");
+        private string ReDefinitionPath(string root)
+        {
+            if (regNum.IsMatch(root)) root = $"i{root}";
+            return root.Replace(@"$", @"s3b1").Replace(@":", @"s3b2").Replace(@"/", @"s3b3").Replace(@"@", @"s3b4").Replace(@"_", @"s3b5").Replace(@"-", @"s3b6").Replace(@"+", @"s3b7").Replace(@"#", "s3b8");
         }
 
         public void Start()
@@ -103,6 +131,43 @@ namespace OpcXml_SP_Service
             ReceivedFilePath = iniFile.IniReadValue(@"Customize", @"ReceivedFilePath");
             updRate = Convert.ToInt32(iniFile.IniReadValue(@"Customize", @"UpdateRate"));
             Serialport = new serialPort(ComName, 115200, Parity.None, 8, StopBits.One, ReceivedFilePath);
+            HasOpcRiver = Convert.ToBoolean(iniFile.IniReadValue(@"Customize", @"HasOpcRiver"));
+            //OpcRiver Statement
+            if (HasOpcRiver)
+            {
+                OpcRiverName = iniFile.IniReadValue(@"OpcRiver", @"OpcRiverName");
+                OpcRiverHost = iniFile.IniReadValue(@"OpcRiver", @"OpcRiverHost");
+                OpcRiverItemsFile = iniFile.IniReadValue(@"OpcRiver", @"OpcRiverItemsFile");
+                OpcRiver = new OpcClient(OpcRiverName, OpcRiverHost);
+                try
+                {
+                    for(int i = 1; i <= 8; i++)
+                    {
+                        OpcRiverTags.Add($"Channel1.Device1.Tag{i}");
+                    }
+                    if (File.Exists(OpcRiverItemsFile))
+                    {
+                        using (StreamReader sr = new StreamReader(OpcRiverItemsFile))
+                        {
+                            while (sr.Peek() >= 0)
+                            {
+                                string ret = sr.ReadLine();
+                                OpcRiverItems.Add(ret);
+                            }
+                            if (OpcRiver.OpcIsConnected())
+                                OpcRiver.AddOpcDaItems(OpcRiverItems.ToArray());
+                        }
+                        Console.WriteLine($"Reading OpcRiver Configuration and Initializing..." +
+                            $"\nServerName => {OpcRiverName}" +
+                            $"\nServerHost => {OpcRiverHost}");
+                    }
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            //OpcRiver Statement
             ServerCnt = 0;
             while (!iniFile.IniReadValue(@"SystemCfg", $"OpcServerName_{ServerCnt}").Equals(@"NotFound"))
             {
@@ -131,7 +196,7 @@ namespace OpcXml_SP_Service
                                 OpcClient[ServerCnt].AddOpcDaItems(OpcItemsNamed.ToArray());
                         }
 
-                        Console.WriteLine($"ReadService_{ServerCnt} Initializing..." +
+                        Console.WriteLine($"Reading Service_{ServerCnt} Configuration and Initializing..." +
                             $"\nServerName => {ServerName[ServerCnt]}" +
                             $"\nServerHost => {ServerHost[ServerCnt]}");
                     }
@@ -146,7 +211,6 @@ namespace OpcXml_SP_Service
                 }
                 ServerCnt++;
             }
-
         }
     }
 }

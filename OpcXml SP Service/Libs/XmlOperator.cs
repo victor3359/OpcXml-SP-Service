@@ -8,7 +8,7 @@ namespace OpcXml_SP_Service.Libs
     {
         public XmlDocument doc { get; }
         private static string rootName = @"PowerPlant";
-        private static string XMLfilePath;
+        private static string XmlFilePath;
         Regex regNum = new Regex("^[0-9]");
         public XmlOperator(string subName, string host, string filePath)
         {
@@ -17,7 +17,7 @@ namespace OpcXml_SP_Service.Libs
             Substation.SetAttribute(@"Name", subName);
             Substation.SetAttribute(@"Host", host);
             doc.AppendChild(Substation);
-            XMLfilePath = filePath;
+            XmlFilePath = filePath;
         }
         private string ReDefinitionPath(string root)
         {
@@ -69,7 +69,7 @@ namespace OpcXml_SP_Service.Libs
                 XmlDocument xml = new XmlDocument();
                 xml.LoadXml(xs);
 
-                xml.Save(XMLfilePath);
+                xml.Save(XmlFilePath);
             }catch(Exception e)
             {
                 Console.WriteLine(e.Message);
@@ -78,7 +78,7 @@ namespace OpcXml_SP_Service.Libs
 
         public void SavingFile()
         {
-            doc.Save(XMLfilePath);
+            doc.Save(XmlFilePath);
         }
     }
 }

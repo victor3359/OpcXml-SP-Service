@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 using TitaniumAS.Opc.Client.Common;
 using TitaniumAS.Opc.Client.Da;
@@ -69,6 +70,23 @@ namespace OpcXml_SP_Service.Libs
         {
             OpcDaItemValue[] values = group.Read(group.Items, OpcDaDataSource.Device);
             return values;
+        }
+        //Write To OpcRiver Service
+        public void WriteOpcRiverDaValues(string[] items, object[] value)
+        {
+            List<OpcDaItem> Items = new List<OpcDaItem>();
+            try
+            {
+                foreach (string item in items)
+                {
+                    Items.Add(group.Items.FirstOrDefault(x => x.ItemId == item));
+                }
+                group.Write(Items, value);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
         static void OnGroupValuesChanged(object sender, OpcDaItemValuesChangedEventArgs args)
         {
