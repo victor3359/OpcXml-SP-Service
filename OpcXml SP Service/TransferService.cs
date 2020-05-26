@@ -63,7 +63,7 @@ namespace OpcXml_SP_Service
                     }
                     else
                     {
-                        Serialport = new serialPort(ComName, 115200, Parity.None, 8, StopBits.One, XmlPath[ServerInd]);
+                        Serialport = new serialPort(ComName, 115200, Parity.None, 8, StopBits.One, ReceivedFilePath);
                     }
                 }
                 catch (Exception Ex)
@@ -95,9 +95,9 @@ namespace OpcXml_SP_Service
             //Todo: INI File Handler
             SetupIni iniFile = new SetupIni(iniFileName, 1024);
             ComName = iniFile.IniReadValue(@"Customize", @"ComPort");
-            Serialport = new serialPort(ComName, 115200, Parity.None, 8, StopBits.One, ReceivedFilePath);
             ReceivedFilePath = iniFile.IniReadValue(@"Customize", @"ReceivedFilePath");
             updRate = Convert.ToInt32(iniFile.IniReadValue(@"Customize", @"UpdateRate"));
+            Serialport = new serialPort(ComName, 115200, Parity.None, 8, StopBits.One, ReceivedFilePath);
             ServerCnt = 0;
             while (!iniFile.IniReadValue(@"SystemCfg", $"OpcServerName_{ServerCnt}").Equals(@"NotFound"))
             {

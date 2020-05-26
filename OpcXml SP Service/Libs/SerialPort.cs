@@ -8,12 +8,12 @@ namespace OpcXml_SP_Service.Libs
     class serialPort
     {
         private SerialPort port;
-        public bool isConnected = false;
-        public string data { get; set; }
+        private string data;
         private string tmpStr = @"<Data>", tmpEnd = @"</Data>";
         private DateTime localDate;
+        public bool isConnected = false;
         private string ReceivedFilePath;
-        private XmlDocument xml { get; set; }
+        private XmlDocument xml = new XmlDocument();
         public serialPort(string portName, int baudRate, Parity parity, int dataBits, StopBits stopBits, string ReceivedFilePath)
         {
             try
@@ -26,8 +26,8 @@ namespace OpcXml_SP_Service.Libs
             }
             catch(Exception ex)
             {
-                localDate = DateTime.Now;
                 Console.WriteLine(ex.Message);
+                localDate = DateTime.Now;
                 string[] Error = new string[] { $"{localDate}\t\t{ex.Message}" };
                 File.AppendAllLines(@"./SPConnectionError.log", Error);
                 isConnected = false;
@@ -56,10 +56,21 @@ namespace OpcXml_SP_Service.Libs
         }
         private void serial_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
+            data = "";
             data += $"{ port.ReadTo(tmpEnd) }{tmpEnd}";
-            Console.WriteLine($"Received: {data}");
-            xml.LoadXml(data);
-            xml.Save(ReceivedFilePath);
+            Console.WriteLine($"Received:\n{data}");
+            try
+            {
+                xml.LoadXml(data);
+                xml.Save(ReceivedFilePath);
+            }
+            catch(Exception ex)
+            {
+                localDate = DateTime.Now;
+                string[] Error = new string[] { $"{localDate}\t\t{ex.Message}" };
+                File.AppendAllLines(@"./SPConnectionError.log", Error);
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
