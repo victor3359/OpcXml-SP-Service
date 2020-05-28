@@ -28,7 +28,7 @@ namespace OpcXml_SP_Service.Libs
             catch (Exception ex)
             {
                 localDate = DateTime.Now;
-                string[] Error = new string[] { $"{localDate}\t\t{ex.Message} at ServerConnect." };
+                string[] Error = new string[] { $"{localDate}\t\t{ex.Message}\n {host}/{progid} at ServerConnect." };
                 File.AppendAllLines(@"./OpcConnectionError.log", Error);
                 Console.WriteLine(ex.Message);
             }

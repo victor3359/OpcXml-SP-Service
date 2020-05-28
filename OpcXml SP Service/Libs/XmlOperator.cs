@@ -7,8 +7,8 @@ namespace OpcXml_SP_Service.Libs
     class XmlOperator
     {
         public XmlDocument doc { get; }
-        private static string rootName = @"PowerPlant";
-        private static string XmlFilePath;
+        private string rootName = @"PowerPlant";
+        private string XmlFilePath;
         Regex regNum = new Regex("^[0-9]");
         public XmlOperator(string subName, string host, string filePath)
         {
@@ -78,6 +78,7 @@ namespace OpcXml_SP_Service.Libs
 
         public void SavingFile()
         {
+            Console.WriteLine($"\nSaving File: {XmlFilePath}.\n");
             doc.Save(XmlFilePath);
         }
     }

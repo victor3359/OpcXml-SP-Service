@@ -20,7 +20,7 @@ namespace OpcXml_SP_Service
         private static int updRate;
         private static int ServerCnt;
 
-        private static List<string> OpcItemsNamed = new List<string>();
+        private static List<List<string>> OpcItemsNamed = new List<List<string>>();
         private static serialPort Serialport;
 
         private static OpcClient[] OpcClient = new OpcClient[_MaxmumOpcClientInstance];
@@ -36,6 +36,8 @@ namespace OpcXml_SP_Service
         private static List<string> OpcRiverItems = new List<string>();
         private static OpcClient OpcRiver;
         private static List<string> OpcRiverTags = new List<string>();
+
+        private static DateTime localDate;
 
         public TransferService()
         {
@@ -55,6 +57,7 @@ namespace OpcXml_SP_Service
                     {
                         Console.WriteLine($"OpcServer_{ServerInd} connection is failed, reconnecting...");
                         Reconnect2OpcServer(ServerInd);
+                        continue;
                     }
                     OpcDaItemValue[] items = OpcClient[ServerInd].ReadOpcDaValues();
                     foreach (var item in items)
@@ -120,7 +123,17 @@ namespace OpcXml_SP_Service
         static void Reconnect2OpcServer(int ServerInd)
         {
             OpcClient[ServerInd] = new OpcClient(ServerName[ServerInd], ServerHost[ServerInd]);
-            OpcClient[ServerInd].AddOpcDaItems(OpcItemsNamed.ToArray());
+            OpcClient[ServerInd].AddOpcDaItems(OpcItemsNamed[ServerInd].ToArray());
+            localDate = DateTime.Now;
+            if (OpcClient[ServerInd].OpcIsConnected()) {
+                string[] Msg = new string[] { $"{localDate}\t\t\n Server_{ServerInd} is Connected." };
+                File.AppendAllLines(@"./OpcConnectionMessage.log", Msg);
+            }
+            else
+            {
+                string[] Msg = new string[] { $"{localDate}\t\t\n Server_{ServerInd} Connection failed." };
+                File.AppendAllLines(@"./OpcConnectionMessage.log", Msg);
+            }
         }
 
         static void Init()
@@ -143,7 +156,7 @@ namespace OpcXml_SP_Service
                 {
                     for(int i = 1; i <= 8; i++)
                     {
-                        OpcRiverTags.Add($"Channel1.Device1.Tag{i}");
+                        OpcRiverTags.Add($"Channel1.Device2.M{i}KW");
                     }
                     if (File.Exists(OpcRiverItemsFile))
                     {
@@ -155,7 +168,7 @@ namespace OpcXml_SP_Service
                                 OpcRiverItems.Add(ret);
                             }
                             if (OpcRiver.OpcIsConnected())
-                                OpcRiver.AddOpcDaItems(OpcRiverItems.ToArray());
+                                OpcRiver.AddOpcDaItems(OpcRiverTags.ToArray());
                         }
                         Console.WriteLine($"Reading OpcRiver Configuration and Initializing..." +
                             $"\nServerName => {OpcRiverName}" +
@@ -171,6 +184,7 @@ namespace OpcXml_SP_Service
             ServerCnt = 0;
             while (!iniFile.IniReadValue(@"SystemCfg", $"OpcServerName_{ServerCnt}").Equals(@"NotFound"))
             {
+                Console.WriteLine($"\nInit Number: {ServerCnt} Process has started.");
                 ServerName[ServerCnt] = iniFile.IniReadValue(@"SystemCfg", $"OpcServerName_{ServerCnt}");
                 ServerHost[ServerCnt] = iniFile.IniReadValue(@"SystemCfg", $"OpcServerHost_{ServerCnt}");
                 XmlPath[ServerCnt] = iniFile.IniReadValue(@"SystemCfg", $"XmlPath_{ServerCnt}");
@@ -186,14 +200,16 @@ namespace OpcXml_SP_Service
                     {
                         using (StreamReader sr = new StreamReader(ConfigFileName[ServerCnt]))
                         {
+                            List<string> ret = new List<string>();
                             while (sr.Peek() >= 0)
                             {
-                                string ret = sr.ReadLine();
-                                OpcItemsNamed.Add(ret);
-                                XmlHandler[ServerCnt].AddNode(ret);
+                                string tmp = sr.ReadLine();
+                                ret.Add(tmp);
+                                XmlHandler[ServerCnt].AddNode(tmp);
                             }
-                            if(OpcClient[ServerCnt].OpcIsConnected())
-                                OpcClient[ServerCnt].AddOpcDaItems(OpcItemsNamed.ToArray());
+                            OpcItemsNamed.Add(ret);
+                            if (OpcClient[ServerCnt].OpcIsConnected())
+                                OpcClient[ServerCnt].AddOpcDaItems(ret.ToArray());
                         }
 
                         Console.WriteLine($"Reading Service_{ServerCnt} Configuration and Initializing..." +
